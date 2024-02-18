@@ -38,5 +38,35 @@ class Postgresql:
         except (Exception, psycopg2.Error) as error:
             print("오류 발생:", error)
 
+    def get_passenger_order_by_name(self):
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM passenger ORDER BY name")
+            rows = cursor.fetchall()
+            cursor.close()
+            return rows
+        except (Exception, psycopg2.Error) as error:
+            print("오류 발생:", error)
 
-        
+    def update_passenger(self, passenger):
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor()
+            sql = f"UPDATE passenger SET name = %s WHERE id = %i"
+            cursor.execute(sql, (passenger.name, passenger.id))
+            conn.commit()
+            cursor.close()
+        except (Exception, psycopg2.Error) as error:
+            print("오류 발생:", error)
+    
+    def delete_passenger(self, id):
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor()
+            sql = f"DELETE FROM passenger WHERE id = %i"
+            cursor.execute(sql, (id))
+            conn.commit()
+            cursor.close()
+        except (Exception, psycopg2.Error) as error:
+            print("오류 발생:", error)
