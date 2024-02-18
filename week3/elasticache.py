@@ -4,11 +4,12 @@ import boto3
 
 class ElastiCache:
     def __init__(self):
-        session = boto3.Session(profile_name='pyo')
-        boto_client = session.client('elasticache')
-        response = boto_client.describe_cache_clusters(CacheClusterId='pyo-redis')
-        endpoint = response['CacheClusters'][0]['ConfigurationEndpoint']
-        self.client = redis.StrictRedis(host=endpoint['Address'], port=endpoint['Port'], decode_responses=True)
+        # session = boto3.Session(profile_name='pyo')
+        # boto_client = session.client('elasticache')
+        # response = boto_client.describe_cache_clusters(CacheClusterId='pyo-redis')
+        # endpoint = response['CacheClusters'][0]['ConfigurationEndpoint']
+        host, port = get_elasticache()
+        self.client = redis.StrictRedis(host=host, port=port, decode_responses=True)
 
     def set(self, key, value):
         self.client.set(key, value)
