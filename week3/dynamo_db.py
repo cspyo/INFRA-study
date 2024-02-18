@@ -23,17 +23,30 @@ class DynamoDB:
             print("Retrieved item:", item)
         else:
             print("Item not found.")
+    
+    def insert_passenger(self, passengers):
+        for passenger in passengers:
+            self.insert_data(data=passenger.to_dict())
+    
+    def get_passengers_order_by_name(self, passengers):
+        response = self.table.scan()
+        items = response['Items']
+        return items
+    
+    def update_passenger(self, passenger):
+        update_expression = "set #attrName = :attrValue"
+        expression_attribute_names = {'#attrName': 'name'}
+        expression_attribute_values = {':attrValue': 'pyo'}
 
+        response = self.table.update_item(
+            Key={'id': passenger.id, 'name': passenger.name},
+            UpdateExpression=update_expression,
+            ExpressionAttributeNames=expression_attribute_names,
+            ExpressionAttributeValues=expression_attribute_values
+        )
 
-def put_data():
-    dynamo = DynamoDB()
-    passengers = read_csv_to_objects('./titanic.csv', TitanicPassenger)
-    for passenger in passengers:
-        dynamo.insert_data(data=passenger.to_dict())
+        return response
 
-
-def get_data():
-    dynamo = DynamoDB()
-    dynamo.get_data(partition_key_value=1, sort_key_value='Braund, Mr. Owen Harris')
-
-get_data()
+    def delete_passenger(self, passenger):
+        response = self.table.delete_item(Key={'id': passenger.id, 'name': passenger.name})
+        return response
