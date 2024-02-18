@@ -28,6 +28,6 @@ class ElastiCache:
 
 def main():
     cache = ElastiCache()
-    cache.set('key', 'value')
-    print(cache.get('key'))
+    cache.set('pyo', 'ok')
+    print(cache.get('pyo'))
 main()
