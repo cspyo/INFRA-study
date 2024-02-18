@@ -38,7 +38,7 @@ class Postgresql:
         except (Exception, psycopg2.Error) as error:
             print("오류 발생:", error)
 
-    def get_passenger_order_by_name(self):
+    def get_passengers_order_by_name(self):
         try:
             conn = self.get_connection()
             cursor = conn.cursor()

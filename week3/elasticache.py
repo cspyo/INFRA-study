@@ -1,6 +1,5 @@
 import redis
 from get_env import get_elasticache
-import boto3
 
 class ElastiCache:
     def __init__(self):
