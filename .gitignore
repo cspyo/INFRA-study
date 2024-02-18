@@ -1,0 +1,5 @@
+week3/.env
+.python-version
+.vscode
+
+*/__pycache__
