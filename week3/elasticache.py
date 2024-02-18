@@ -21,10 +21,36 @@ class ElastiCache:
 
     def keys(self, pattern):
         return self.client.keys(pattern)
+    
+    def insert_passenger(self, passengers):
+        for passenger in passengers:
+            self.set(passenger.id, passenger.to_dict())
+    
+    def get_passengers_order_by_name(self, passengers):
+        result = []
+        for passenger in passengers:
+            result.append(self.get(passenger.id))
+        return sorted(result, key=lambda result: result.name)
+    
+    def update_passenger(self, passenger):
+        new_passenger = {
+            'id': passenger.id,
+            'name': 'pyo',
+            'survived': passenger.survived,
+            'p_class': passenger.p_class,
+            'sex': passenger.sex,
+            'age': passenger.age,
+            'sibsp': passenger.sibsp,
+            'parch': passenger.parch,
+            'ticket': passenger.ticket,
+            'fare': passenger.fare,
+            'cabin': passenger.cabin,
+            'embarked': passenger.embarked
+        }
+        self.set(passenger.id, new_passenger)
+
+    def delete_passenger(self, id):
+        self.delete(id)
 
 
-def main():
-    cache = ElastiCache()
-    cache.set('pyo', 'ok')
-    print(cache.get('pyo'))
-main()
+
