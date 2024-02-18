@@ -8,3 +8,7 @@ def get_rds():
 def get_redshift():
     load_dotenv()
     return os.getenv("REDSHIFT_HOST"), os.getenv("REDSHIFT_PORT"), os.getenv("REDSHIFT_DB_NAME"), os.getenv("REDSHIFT_USER"), os.getenv("REDSHIFT_PASSWORD")
+
+def get_elasticache():
+    load_dotenv()
+    return os.getenv("ELASTICACHE_HOST"), os.getenv("ELASTICACHE_PORT")

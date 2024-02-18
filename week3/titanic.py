@@ -1,6 +1,6 @@
 class TitanicPassenger:
     def __init__(self, PassengerId,Survived,Pclass,Name,Sex,Age,SibSp,Parch,Ticket,Fare,Cabin,Embarked):
-        self.id = PassengerId
+        self.id = int(PassengerId)
         self.survived = Survived
         self.p_class = Pclass
         self.name = Name
@@ -19,3 +19,18 @@ class TitanicPassenger:
     def to_tuple(self):
         return (self.id, self.survived, self.p_class, self.name, self.sex, self.age, self.sibsp, self.parch, self.ticket, self.fare, self.cabin, self.embarked)
 
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'name': self.name,
+            'survived': self.survived,
+            'p_class': self.p_class,
+            'sex': self.sex,
+            'age': self.age,
+            'sibsp': self.sibsp,
+            'parch': self.parch,
+            'ticket': self.ticket,
+            'fare': self.fare,
+            'cabin': self.cabin,
+            'embarked': self.embarked
+        }
