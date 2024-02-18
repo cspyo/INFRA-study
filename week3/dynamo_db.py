@@ -25,11 +25,15 @@ class DynamoDB:
             print("Item not found.")
 
 
-def main():
+def put_data():
     dynamo = DynamoDB()
     passengers = read_csv_to_objects('./titanic.csv', TitanicPassenger)
     for passenger in passengers:
         dynamo.insert_data(data=passenger.to_dict())
+
+
+def get_data():
+    dynamo = DynamoDB()
     dynamo.get_data(partition_key_value=1, sort_key_value='Braund, Mr. Owen Harris')
 
-main()
+get_data()
