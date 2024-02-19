@@ -2,11 +2,11 @@ import sys
 sys.path.append('/home/ubuntu/code/INFRA-study')
 from week3.data_store.postgresql import Postgresql
 from week3.util.csv_to_objects import read_csv_to_objects
-from titanic import TitanicPassenger
+from week3.titanic import TitanicPassenger
 from week3.data_store.elasticache import ElastiCache
 from week3.data_store.dynamo_db import DynamoDB
-import timeit
 import week3.util.get_env as get_env
+import timeit
 import pandas as pd
 
 passengers = read_csv_to_objects('week3/titanic.csv', TitanicPassenger)
