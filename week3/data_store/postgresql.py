@@ -46,6 +46,17 @@ class Postgresql:
             cursor.close()
         except (Exception, psycopg2.Error) as error:
             print("오류 발생:", error)
+    
+    def get_passenger_by_id(self, id):
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM passenger WHERE id = %i", (id))
+            rows = cursor.fetchall()
+            cursor.close()
+            return rows
+        except (Exception, psycopg2.Error) as error:
+            print("오류 발생:", error)
 
     def get_passengers_order_by_age(self):
         try:
