@@ -26,3 +26,5 @@ def insert_passengers():
 
     df = pd.DataFrame(results, columns=['DB', 'Time'])
     df.to_csv('./insert_many.csv', index=False)
+
+insert_passengers()
