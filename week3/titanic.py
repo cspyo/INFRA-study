@@ -5,7 +5,7 @@ class TitanicPassenger:
         self.p_class = Pclass
         self.name = Name
         self.sex = Sex
-        self.age = Age if Age != '' else None
+        self.age = int(Age) if Age != '' else None
         self.sibsp = SibSp
         self.parch = Parch
         self.ticket = Ticket
