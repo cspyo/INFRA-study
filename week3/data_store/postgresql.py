@@ -68,6 +68,17 @@ class Postgresql:
             return rows
         except (Exception, psycopg2.Error) as error:
             print("오류 발생:", error)
+    
+    def get_passengers_range_age(self, age):
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM passenger where age >= %i", (age))
+            rows = cursor.fetchall()
+            cursor.close()
+            return rows
+        except (Exception, psycopg2.Error) as error:
+            print("오류 발생:", error)
 
     def get_passengers_order_by_age(self):
         try:

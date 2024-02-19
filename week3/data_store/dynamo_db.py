@@ -40,6 +40,13 @@ class DynamoDB:
         )
         return response['Items']
     
+    def get_passengers_range_age(self, age):
+        response = self.table.scan(
+            FilterExpression='age >= :age',
+            ExpressionAttributeValues={':age': {'N': str(age)}}
+        )
+        return response['Items']
+    
     def get_passengers_order_by_name(self, passengers):
         response = self.table.scan()
         items = response['Items']
