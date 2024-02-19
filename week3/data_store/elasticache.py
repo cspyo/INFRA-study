@@ -75,7 +75,7 @@ class ElastiCache:
             'cabin': passenger.cabin,
             'embarked': passenger.embarked
         }
-        self.set(passenger.id, new_passenger)
+        self.set(passenger.id, json.dumps(new_passenger))
 
     def delete_passenger(self, id):
         self.delete(id)
