@@ -53,19 +53,14 @@ class DynamoDB:
         return sorted_items
 
     
-    def update_passenger(self, passenger):
-        update_expression = "set #attrName = :attrValue"
-        expression_attribute_names = {'#attrName': 'name'}
-        expression_attribute_values = {':attrValue': 'pyo'}
-
-        response = self.table.update_item(
-            Key={'id': passenger.id, 'name': passenger.name},
-            UpdateExpression=update_expression,
-            ExpressionAttributeNames=expression_attribute_names,
-            ExpressionAttributeValues=expression_attribute_values
-        )
-
-        return response
+    def update_name_by_id(self, name, id):
+        update_response = self.table.update_item(
+                Key={'id': {'N': id}},
+                UpdateExpression="SET Embarked = :new_name",
+                ExpressionAttributeValues={':new_name': {'S': name}},
+                ReturnValues="UPDATED_NEW"
+            )
+        return update_response
 
     def delete_passenger(self, passenger):
         response = self.table.delete_item(Key={'id': passenger.id, 'name': passenger.name})
