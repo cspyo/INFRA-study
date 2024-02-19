@@ -8,8 +8,8 @@ import get_env
 import pandas as pd
 
 passengers = read_csv_to_objects('./titanic.csv', TitanicPassenger)
-rds = Postgresql(get_env.get_rds())
-redshift = Postgresql(get_env.get_redshift())
+rds = Postgresql(*(get_env.get_rds()))
+redshift = Postgresql(*(get_env.get_redshift()))
 redis = ElastiCache()
 dynamodb = DynamoDB()
 

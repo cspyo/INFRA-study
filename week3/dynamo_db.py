@@ -1,6 +1,5 @@
 import boto3
 from csv_to_objects import read_csv_to_objects
-from titanic import TitanicPassenger
 
 class DynamoDB:
     def __init__(self):
