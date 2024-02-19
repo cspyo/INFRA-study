@@ -27,7 +27,7 @@ def update_name_by_id():
     redis_insert_time = timeit.timeit(lambda: redis.update_name_by_id('god',passenger), number=1)
     results.append(['redis', redis_insert_time])
 
-    dynamodb_insert_time = timeit.timeit(lambda: dynamodb.update_name_by_id('god',999), number=1)
+    dynamodb_insert_time = timeit.timeit(lambda: dynamodb.update_name_by_id('god',1), number=1)
     results.append(['dynamodb', dynamodb_insert_time])
 
     df = pd.DataFrame(results, columns=['DB', 'Time'])
