@@ -18,16 +18,14 @@ dynamodb = DynamoDB()
 def insert_passengers():
     results = []
 
-    # rds_insert_time = timeit.timeit(lambda: rds.insert_passengers(passengers), number=1)
-    # results.append(['rds', rds_insert_time])
+    rds_insert_time = timeit.timeit(lambda: rds.insert_passengers(passengers), number=1)
+    results.append(['rds', rds_insert_time])
 
-    # redshift_insert_time = timeit.timeit(lambda: redshift.insert_passengers(passengers), number=1)
-    # results.append(['redshift', redshift_insert_time])
+    redshift_insert_time = timeit.timeit(lambda: redshift.insert_passengers(passengers), number=1)
+    results.append(['redshift', redshift_insert_time])
 
-    # redis_insert_time = timeit.timeit(lambda: redis.insert_passengers(passengers), number=1)
-    # results.append(['redis', redis_insert_time])
-
-    redis.flush_all()
+    redis_insert_time = timeit.timeit(lambda: redis.insert_passengers(passengers), number=1)
+    results.append(['redis', redis_insert_time])
 
     dynamodb_insert_time = timeit.timeit(lambda: dynamodb.insert_passengers(passengers), number=1)
     results.append(['dynamodb', dynamodb_insert_time])
