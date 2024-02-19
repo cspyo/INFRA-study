@@ -1,4 +1,5 @@
 import redis
+import json
 from week3.util.get_env import get_elasticache
 
 class ElastiCache:
@@ -26,7 +27,7 @@ class ElastiCache:
     
     def insert_passengers(self, passengers):
         for passenger in passengers:
-            self.set(passenger.id, passenger.to_dict())
+            self.set(passenger.id, json.dumps(passenger.to_dict()))
     
     def get_passengers_order_by_name(self, passengers):
         result = []
