@@ -30,8 +30,8 @@ class DynamoDB:
     def insert_passenger(self, passenger):
         self.insert_data(data=passenger.to_dict())
 
-    def get_passenger_by_id(self, id):
-        return self.get_data(partition_key_value=id)
+    def get_passenger_by_id(self, id, age):
+        return self.get_data(partition_key_value=id, sort_key_value=age)
     
     def get_passengers_order_by_name(self, passengers):
         response = self.table.scan()
