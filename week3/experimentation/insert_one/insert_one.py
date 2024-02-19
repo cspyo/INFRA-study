@@ -13,7 +13,7 @@ rds = Postgresql(*(get_env.get_rds()))
 redshift = Postgresql(*(get_env.get_redshift()))
 redis = ElastiCache()
 dynamodb = DynamoDB()
-passenger = TitanicPassenger(999,1,1,"pyo",'male',27,1,0,"A/5 21171",7.25,None,'S')
+passenger = TitanicPassenger(999,1,1,"pyo",'male',27,1,0,"A/5 21171",7,None,'S')
 
 def insert_passenger():
     results = []
