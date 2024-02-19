@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/home/ubuntu/code/INFRA-study')
 from week3.data_store.postgresql import Postgresql
 from week3.util.csv_to_objects import read_csv_to_objects
 from titanic import TitanicPassenger
