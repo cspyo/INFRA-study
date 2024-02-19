@@ -85,6 +85,6 @@ class ElastiCache:
                 passenger['name'] = 'god'
                 self.set(passenger['id'], json.dumps(passenger))
 
-    def delete_passenger(self, id):
+    def delete_by_id(self, id):
         self.delete(id)
         

@@ -75,6 +75,6 @@ class DynamoDB:
             if item['age'] == 27:
                 self.update_name_by_id('god', item['id']) 
 
-    def delete_passenger(self, passenger):
+    def delete_by_id(self, passenger):
         response = self.table.delete_item(Key={'id': passenger.id, 'name': passenger.name})
         return response

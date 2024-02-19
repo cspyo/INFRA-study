@@ -114,7 +114,7 @@ class Postgresql:
             print("오류 발생:", error)
 
     
-    def delete_passenger(self, id):
+    def delete_by_id(self, id):
         try:
             conn = self.get_connection()
             cursor = conn.cursor()
