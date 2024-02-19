@@ -48,12 +48,9 @@ class DynamoDB:
         return response['Items']
     
     def get_passengers_order_by_age(self):
-        # 이미 age가 정렬키임.
-        response = self.table.query(
-            ScanIndexForward=True
-        )
-        items = response['Items']
-        return items
+        response = self.table.scan()
+        sorted_items = sorted(response['Items'], key=lambda x: x['age'])
+        return sorted_items
 
     
     def update_passenger(self, passenger):
