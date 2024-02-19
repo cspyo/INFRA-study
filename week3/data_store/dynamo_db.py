@@ -35,7 +35,7 @@ class DynamoDB:
 
     def get_passengers_by_age(self, age):
         response = self.table.query(
-            KeyConditionExpression='age = :age_val',
+            FilterExpression='age = :age_val',
             ExpressionAttributeValues={':age_val': age}
         )
         items = response['Items']
