@@ -58,7 +58,7 @@ class ElastiCache:
         result = []
         for passenger in all_passengers:
             result.append(json.loads(self.get(passenger)))
-        return sorted(result, key=lambda result: result.age)
+        return sorted(result, key=lambda result: result['age'])
     
     def update_passenger(self, passenger):
         new_passenger = {
