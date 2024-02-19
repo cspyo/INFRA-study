@@ -54,12 +54,19 @@ class DynamoDB:
 
     
     def update_name_by_id(self, name, id):
-        update_response = self.table.update_item(
-                Key={'id': {'N': id}},
-                UpdateExpression="SET sex = :new_name",
-                ExpressionAttributeValues={':new_name': {'S': name}},
-            )
-        return update_response
+        update_expression = "SET #nm = :name_val"
+        expression_attribute_names = {"#nm": "name"}
+        expression_attribute_values = {":name_val": name}
+
+        response = self.table.update_item(
+            Key={'id': id},
+            UpdateExpression=update_expression,
+            ExpressionAttributeNames=expression_attribute_names,
+            ExpressionAttributeValues=expression_attribute_values,
+            ReturnValues="UPDATED_NEW"  
+        )
+        updated_item = response['Attributes']
+        return updated_item
 
     def delete_passenger(self, passenger):
         response = self.table.delete_item(Key={'id': passenger.id, 'name': passenger.name})
