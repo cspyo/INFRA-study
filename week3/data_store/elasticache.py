@@ -29,6 +29,9 @@ class ElastiCache:
         for passenger in passengers:
             self.set(passenger.id, json.dumps(passenger.to_dict()))
     
+    def insert_passenger(self, passenger):
+        self.set(passenger.id, json.dumps(passenger.to_dict()))
+    
     def get_passengers_order_by_name(self, passengers):
         result = []
         for passenger in passengers:

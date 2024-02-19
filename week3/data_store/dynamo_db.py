@@ -27,6 +27,9 @@ class DynamoDB:
         for passenger in passengers:
             self.insert_data(data=passenger.to_dict())
     
+    def insert_passenger(self, passenger):
+        self.insert_data(data=passenger.to_dict())
+    
     def get_passengers_order_by_name(self, passengers):
         response = self.table.scan()
         items = response['Items']
