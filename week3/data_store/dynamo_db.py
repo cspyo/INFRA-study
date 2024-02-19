@@ -56,7 +56,7 @@ class DynamoDB:
     def update_name_by_id(self, name, id):
         update_expression = "SET #nm = :name_val"
         expression_attribute_names = {"#nm": "name"}
-        expression_attribute_values = {":name_val": name}
+        expression_attribute_values = {":name_val": {'S': name}}
 
         response = self.table.update_item(
             Key={'id': {'N': id}},
