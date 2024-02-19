@@ -77,6 +77,14 @@ class ElastiCache:
         }
         self.set(passenger.id, json.dumps(new_passenger))
 
+    def update_passengers(self):
+        all_passengers = self.keys('*')
+        for passenger in all_passengers:
+            passenger = json.loads(self.get(passenger))
+            if passenger['age'] == 27:
+                passenger['name'] = 'god'
+                self.set(passenger['id'], json.dumps(passenger))
+
     def delete_passenger(self, id):
         self.delete(id)
         

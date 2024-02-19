@@ -56,10 +56,10 @@ class DynamoDB:
     def update_name_by_id(self, name, id):
         update_expression = "SET #nm = :name_val"
         expression_attribute_names = {"#nm": "name"}
-        expression_attribute_values = {":name_val": "god"}
+        expression_attribute_values = {":name_val": name}
 
         response = self.table.update_item(
-            Key={'id': 1},
+            Key={'id': id},
             UpdateExpression=update_expression,
             ExpressionAttributeNames=expression_attribute_names,
             ExpressionAttributeValues=expression_attribute_values,
@@ -67,6 +67,13 @@ class DynamoDB:
         )
         updated_item = response['Attributes']
         return updated_item
+    
+    def update_passengers(self):
+        response = self.table.scan()
+        items = response['Items']
+        for item in items:
+            if item['age'] == 27:
+                self.update_name_by_id('god', item['id']) 
 
     def delete_passenger(self, passenger):
         response = self.table.delete_item(Key={'id': passenger.id, 'name': passenger.name})

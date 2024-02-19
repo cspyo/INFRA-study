@@ -102,6 +102,18 @@ class Postgresql:
         except (Exception, psycopg2.Error) as error:
             print("오류 발생:", error)
     
+    def update_passengers(self):
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor()
+            sql = f"UPDATE passenger SET name = %s WHERE age = %i"
+            cursor.execute(sql, ('god', 27))
+            conn.commit()
+            cursor.close()
+        except (Exception, psycopg2.Error) as error:
+            print("오류 발생:", error)
+
+    
     def delete_passenger(self, id):
         try:
             conn = self.get_connection()
