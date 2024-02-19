@@ -20,6 +20,9 @@ class ElastiCache:
 
     def keys(self, pattern):
         return self.client.keys(pattern)
+
+    def flush_all(self):
+        self.client.flushall()
     
     def insert_passenger(self, passengers):
         for passenger in passengers:
@@ -52,4 +55,6 @@ class ElastiCache:
         self.delete(id)
 
 
+aa = ElastiCache()
+aa.flush_all()
 
