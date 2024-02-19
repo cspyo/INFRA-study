@@ -27,6 +27,8 @@ def insert_passengers():
     # redis_insert_time = timeit.timeit(lambda: redis.insert_passengers(passengers), number=1)
     # results.append(['redis', redis_insert_time])
 
+    redis.flush_all()
+
     dynamodb_insert_time = timeit.timeit(lambda: dynamodb.insert_passengers(passengers), number=1)
     results.append(['dynamodb', dynamodb_insert_time])
 
