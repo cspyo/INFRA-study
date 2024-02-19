@@ -1,5 +1,5 @@
 import redis
-from get_env import get_elasticache
+from week3.util.get_env import get_elasticache
 
 class ElastiCache:
     def __init__(self):
@@ -24,7 +24,7 @@ class ElastiCache:
     def flush_all(self):
         self.client.flushall()
     
-    def insert_passenger(self, passengers):
+    def insert_passengers(self, passengers):
         for passenger in passengers:
             self.set(passenger.id, passenger.to_dict())
     

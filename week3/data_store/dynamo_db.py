@@ -1,5 +1,5 @@
 import boto3
-from csv_to_objects import read_csv_to_objects
+from week3.util.csv_to_objects import read_csv_to_objects
 
 class DynamoDB:
     def __init__(self):
@@ -23,7 +23,7 @@ class DynamoDB:
         else:
             print("Item not found.")
     
-    def insert_passenger(self, passengers):
+    def insert_passengers(self, passengers):
         for passenger in passengers:
             self.insert_data(data=passenger.to_dict())
     

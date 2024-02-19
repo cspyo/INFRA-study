@@ -1,6 +1,4 @@
 import psycopg2
-from dotenv import load_dotenv
-import os 
 
 class Postgresql:
     def __init__(self, host, port, database, user, password):
@@ -26,23 +24,34 @@ class Postgresql:
         except (Exception, psycopg2.Error) as error:
             print("오류 발생:", error)
 
-    def insert_passenger(self, passengers):
+    def insert_passengers(self, passengers):
         try:
             conn = self.get_connection()
             cursor = conn.cursor()
-            for passenger in passengers:
-                sql = f"INSERT INTO passenger (id, survived, p_class, name, sex, age, sibsp, parch, ticket, fare, cabin, embarked) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                cursor.execute(sql, passenger.to_tuple())
+            sql = "INSERT INTO passenger (id, survived, p_class, name, sex, age, sibsp, parch, ticket, fare, cabin, embarked) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            passenger_data = [passenger.to_tuple() for passenger in passengers]
+            cursor.executemany(sql, passenger_data)
             conn.commit()
             cursor.close()
         except (Exception, psycopg2.Error) as error:
             print("오류 발생:", error)
 
-    def get_passengers_order_by_name(self):
+    def insert_passenger(self, passenger):
         try:
             conn = self.get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM passenger ORDER BY name")
+            sql = f"INSERT INTO passenger (id, survived, p_class, name, sex, age, sibsp, parch, ticket, fare, cabin, embarked) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+            cursor.execute(sql, passenger.to_tuple())
+            conn.commit()
+            cursor.close()
+        except (Exception, psycopg2.Error) as error:
+            print("오류 발생:", error)
+
+    def get_passengers_order_by_age(self):
+        try:
+            conn = self.get_connection()
+            cursor = conn.cursor()
+            cursor.execute("SELECT * FROM passenger ORDER BY age")
             rows = cursor.fetchall()
             cursor.close()
             return rows
