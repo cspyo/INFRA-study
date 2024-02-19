@@ -53,8 +53,4 @@ class ElastiCache:
 
     def delete_passenger(self, id):
         self.delete(id)
-
-
-aa = ElastiCache()
-aa.flush_all()
-
+        
