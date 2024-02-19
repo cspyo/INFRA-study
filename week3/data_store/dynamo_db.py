@@ -13,7 +13,7 @@ class DynamoDB:
 
     def get_data(self, partition_key_value, sort_key_value = None):
         if sort_key_value:
-            response = self.table.get_item(Key={'id': partition_key_value, 'name': sort_key_value})
+            response = self.table.get_item(Key={'id': partition_key_value, 'age': sort_key_value})
         else:
             response = self.table.get_item(Key={'id': partition_key_value})
     
