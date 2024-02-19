@@ -73,7 +73,7 @@ class Postgresql:
         try:
             conn = self.get_connection()
             cursor = conn.cursor()
-            cursor.execute("SELECT * FROM passenger where age >= %i", (age))
+            cursor.execute("SELECT * FROM passenger where age > %i", (age))
             rows = cursor.fetchall()
             cursor.close()
             return rows

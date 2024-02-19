@@ -42,7 +42,7 @@ class DynamoDB:
     
     def get_passengers_range_age(self, age):
         response = self.table.scan(
-            FilterExpression='age >= :age',
+            FilterExpression='age > :age',
             ExpressionAttributeValues={':age': {'N': str(age)}}
         )
         return response['Items']

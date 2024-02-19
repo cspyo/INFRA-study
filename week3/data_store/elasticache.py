@@ -49,7 +49,7 @@ class ElastiCache:
         results = []
         for passenger in all_passengers:
             passenger = json.loads(self.get(passenger))
-            if passenger['age'] >= age:
+            if passenger['age'] > age:
                 results.append(passenger)
         return results
 
