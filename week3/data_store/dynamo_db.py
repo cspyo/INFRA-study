@@ -32,6 +32,14 @@ class DynamoDB:
 
     def get_passenger_by_id(self, id, age):
         return self.get_data(partition_key_value=id, sort_key_value=age)
+
+    def get_passengers_by_age(self, age):
+        response = self.table.query(
+            KeyConditionExpression='age = :age_val',
+            ExpressionAttributeValues={':age_val': age}
+        )
+        items = response['Items']
+        return items
     
     def get_passengers_order_by_name(self, passengers):
         response = self.table.scan()

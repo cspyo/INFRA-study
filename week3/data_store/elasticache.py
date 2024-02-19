@@ -35,6 +35,15 @@ class ElastiCache:
     def get_passenger_by_id(self, id):
         return self.get(id)
     
+    def get_passengers_by_age(self, age):
+        all_passengers = self.keys('*')
+        results = []
+        for passenger in all_passengers:
+            passenger = json.loads(self.get(passenger))
+            if passenger['age'] == age:
+                results.append(passenger)
+        return results
+    
     def get_passengers_order_by_name(self, passengers):
         result = []
         for passenger in passengers:
