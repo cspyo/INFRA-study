@@ -1,11 +1,8 @@
 from flask import Flask, request
-from flask_cors import CORS
-from collections import defaultdict
 import threading
 import time
 
 app = Flask(__name__)
-CORS(app)
 
 # 이벤트 수신 시간 기록을 위한 변수
 start_time = None
