@@ -3,3 +3,5 @@ week3/.env
 .vscode
 
 */__pycache__
+*/*/__pycache__
+*/*/*/__pycache__
