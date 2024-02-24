@@ -90,10 +90,8 @@ def handle_event():
 
     return 'Event received'
 
-@app.route('/', methods=['POST'])
-def get_subscriber():
-    print(request.data.decode('utf-8'))
-    print(request)
+@app.route('/', methods=['GET'])
+def hello():
     return 'Hello'
 
 if __name__ == '__main__':
