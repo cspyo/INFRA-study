@@ -87,9 +87,9 @@ def handle_event():
 
     return 'Event received'
 
-@app.route('/', methods=['GET'])
-def hello():
+@app.route('/')
+def home():
     return 'Hello'
 
 if __name__ == '__main__':
-    app.run(port=5252)
+    app.run('0.0.0.0', port=4000)
