@@ -13,7 +13,7 @@ topic_arn = get_sns_sqs_std_topic()
 def publish_events(i):
     timestamp = time.time() 
     message_body = {
-        'Message': timestamp,
+        'Message': timestamp
     }
     try:
         sns.publish(TopicArn=topic_arn, Message=str(message_body)) 
