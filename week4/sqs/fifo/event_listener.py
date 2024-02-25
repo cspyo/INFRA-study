@@ -42,7 +42,7 @@ def start_listener():
     while True:
         for message in receive_message():
             message_id, message_timestamp, receipt_handle = unpack_message(message)
-            handle_event('sqs_std', message_id, message_timestamp)
+            handle_event('sqs_fifo', message_id, message_timestamp)
             delete_message(receipt_handle)
             
 if __name__ == "__main__":

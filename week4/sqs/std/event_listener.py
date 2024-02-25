@@ -15,7 +15,7 @@ def receive_message():
         QueueUrl=queue_url,
         AttributeNames=['All'],
         MaxNumberOfMessages=10,
-        WaitTimeSeconds=10
+        WaitTimeSeconds=20
     )
     if response:
         return response['Messages']

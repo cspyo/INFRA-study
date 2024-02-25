@@ -3,7 +3,7 @@ import concurrent.futures
 
 def emit_event(emit_function):
     num_events_per_second = 100
-    seconds_for_publish = 1
+    seconds_for_publish = 60
 
     start_time = time.time()
     try:

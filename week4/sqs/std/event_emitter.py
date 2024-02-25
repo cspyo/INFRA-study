@@ -14,7 +14,6 @@ def publish_events(i):
     timestamp = time.time() 
     message_body = {
         'Message': timestamp,
-        'MessageAttributes': {}
     }
     sqs.send_message(QueueUrl=queue_url, MessageBody=str(message_body)) 
 
