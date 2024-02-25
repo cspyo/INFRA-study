@@ -18,7 +18,7 @@ def publish_events(i):
     }
     try:
         kinesis.put_record(
-            StreamArn=stream_arn,
+            StreamARN=stream_arn,
             Data=json.dumps(message_body),
             PartitionKey='partition_key'
         )
