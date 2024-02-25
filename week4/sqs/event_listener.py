@@ -4,23 +4,29 @@ import boto3
 from week4.util.get_env import get_sqs_std
 from week4.event_handler import handle_event
 import threading
+import json
 
 session = boto3.Session(profile_name='pyo')
 sqs = session.client('sqs')
 queue_url = get_sqs_std()
 
 def receive_message():
-    messages = sqs.receive_message(
+    response = sqs.receive_message(
         QueueUrl=queue_url,
         AttributeNames=['All'],
         MaxNumberOfMessages=1,
         WaitTimeSeconds=10
     )
-    return messages
+    return response['Messages']
+
+def get_timestamp_from_body(body):
+    dict_value = json.loads(body.replace("'", "\""))
+    return float(dict_value.get("Message"))
 
 def unpack_message(message):
     message_id = message['MessageId']
-    message_timestamp = float(message['Body'])
+    message_body = message['Body']
+    message_timestamp = get_timestamp_from_body(message_body)
     receipt_handle = message['ReceiptHandle']
     return message_id, message_timestamp, receipt_handle
 
