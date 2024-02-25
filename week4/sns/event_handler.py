@@ -18,15 +18,17 @@ def event_timer():
 
     start_time = time.time()
 
-    time.sleep(20)
+    while True:
+        if total_events >= 1:
+            end_time = time.time()
+            print(end_time-start_time)
+            metrics_to_csv()
+            break
+        
 
-    metrics_to_csv()
+    # time.sleep(60)
 
-    total_events = 0
-    unique_events = set()
-    event_timestamps = []
-    start_time = time.time()
-    timer_running = False
+    # metrics_to_csv()
 
 def metrics_to_csv():
     global total_events, unique_events, event_timestamps, start_time

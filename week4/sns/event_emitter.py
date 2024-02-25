@@ -14,7 +14,10 @@ def produce_events(topic_arn):
     for i in range(1 * 1):  
         timestamp = time.time()
         message = str(timestamp)
+        start_time = time.time()
         sns.publish(TopicArn=topic_arn, Message=message) 
+        end_time = time.time()
+        print(end_time-start_time)
         time.sleep(0.01)
 
 produce_events(topic_arn)
