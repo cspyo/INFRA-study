@@ -14,10 +14,12 @@ def receive_message():
     response = sqs.receive_message(
         QueueUrl=queue_url,
         AttributeNames=['All'],
-        MaxNumberOfMessages=1,
+        MaxNumberOfMessages=10,
         WaitTimeSeconds=10
     )
-    return response['Messages']
+    if response:
+        return response['Messages']
+    return []
 
 def get_timestamp_from_body(body):
     dict_value = json.loads(body.replace("'", "\""))
