@@ -28,3 +28,7 @@ def get_sns_sqs_std_queue():
 def get_sns_sqs_fifo_queue():
     load_dotenv()
     return os.getenv("SNS_SQS_FIFO_QUEUE_URL")
+
+def get_kinesis_stream_arn():
+    load_dotenv()
+    return os.getenv("KINESIS_STREAM_ARN")
