@@ -18,4 +18,4 @@ def publish_events(i):
     sqs.send_message(QueueUrl=queue_url, MessageBody=str(message_body)) 
 
 
-emit_event(publish_events)
+emit_event(60, publish_events)

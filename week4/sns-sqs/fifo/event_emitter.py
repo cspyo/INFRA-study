@@ -14,6 +14,10 @@ topic_arn = get_sns_sqs_fifo_topic()
 def publish_events(i):
     timestamp = time.time() 
     message = str(timestamp)
-    sns.publish(TopicArn=topic_arn, Message=message, MessageDeduplicationId=str(uuid4()), MessageGroupId='group1') 
+    try:
+        sns.publish(TopicArn=topic_arn, Message=message, MessageDeduplicationId=str(uuid4()), MessageGroupId='group1')
+    except Exception as e:
+        print(f"An error occurred in emit_event: {e}") 
+    
 
-emit_event(publish_events)
+emit_event(60, publish_events)

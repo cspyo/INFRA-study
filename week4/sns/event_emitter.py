@@ -15,4 +15,4 @@ def publish_events(i):
     message = str(timestamp)
     sns.publish(TopicArn=topic_arn, Message=message) 
 
-emit_event(publish_events)
+emit_event(60, publish_events)

@@ -26,4 +26,4 @@ def publish_events(i):
         print(f"An error occurred in emit_event: {e}")
 
 print(queue_url)
-emit_event(publish_events)
+emit_event(60, publish_events)
