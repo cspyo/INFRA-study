@@ -2,7 +2,7 @@ import sys
 sys.path.append('/home/ubuntu/code/INFRA-study')
 from flask import Flask, request
 import json
-from event_handler import handle_event
+from week4.event_handler import handle_event
 
 app = Flask(__name__)
 

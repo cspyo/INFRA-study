@@ -9,11 +9,11 @@ total_events = 0
 unique_events = set()
 event_timestamps = []
 
-def event_timer():
+def event_timer(queue_name):
     global start_time, total_events, unique_events, event_timestamps, timer_running
     start_time = time.time()
     time.sleep(60)
-    metrics_to_csv()
+    metrics_to_csv(queue_name)
 
 def metrics_to_csv(queue_name):
     global total_events, unique_events, event_timestamps, start_time
@@ -31,7 +31,7 @@ def metrics_to_csv(queue_name):
         'duration': [end_time-start_time]
     })
 
-    csv_name = f'./{queue_name}_metrics.csv'
+    csv_name = f'/home/ubuntu/code/INFRA-study/week4/metrics/{queue_name}_metrics.csv'
     metrics_df.to_csv(csv_name, index=False)
 
     print("Total events received:", total_events)
@@ -53,7 +53,8 @@ def handle_event(queue_name, message_id, message_timestamp):
     global total_events, unique_events, event_timestamps, timer_running
 
     if not timer_running:
-        timer_thread = threading.Thread(target=event_timer, args=(queue_name))
+        print("timer start")
+        timer_thread = threading.Thread(target=event_timer, args=(queue_name,))
         timer_thread.start()
         timer_running = True
 
