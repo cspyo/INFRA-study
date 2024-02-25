@@ -37,8 +37,14 @@ def metrics_to_csv():
 
     unordered_events = count_unordered_events(event_timestamps)
 
-    df = pd.DataFrame([total_events, duplicates, unordered_events, end_time-start_time], columns=['DB', 'Time'])
-    df.to_csv('./sns.csv', index=False)
+    metrics_df = pd.DataFrame({
+        'total_events': [total_events],
+        'duplicates': [duplicates],
+        'unordered_events': [unordered_events],
+        'duration': [end_time-start_time]
+    })
+
+    metrics_df.to_csv('./sns_metrics.csv', index=False)
 
     print("Total events received:", total_events)
     print("Duplicate events:", duplicates)
