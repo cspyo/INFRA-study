@@ -18,7 +18,7 @@ def event_timer():
 
     start_time = time.time()
 
-    time.sleep(60)
+    time.sleep(5)
 
     metrics_to_csv()
 
@@ -44,7 +44,7 @@ def metrics_to_csv():
         'duration': [end_time-start_time]
     })
 
-    metrics_df.to_csv('./sns_metrics.csv', index=False)
+    # metrics_df.to_csv('./sns_metrics.csv', index=False)
 
     print("Total events received:", total_events)
     print("Duplicate events:", duplicates)
@@ -66,6 +66,7 @@ def handle_event():
     global total_events, unique_events, event_timestamps, timer_running
 
     event = request.data.decode('utf-8')
+    print(event)
     
     if not timer_running:
         timer_thread = threading.Thread(target=event_timer)
