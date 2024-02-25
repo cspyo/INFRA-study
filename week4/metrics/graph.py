@@ -1,13 +1,10 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-# CSV 파일 읽기
 data = pd.read_csv("./all_metrics.csv")
 
-# 이름별로 그룹화
 grouped_data = data.groupby("name")
 
-# 그래프 생성
 metrics = ['total_events', 'duplicates', 'unordered_events', 'duration']
 
 for metric in metrics:
