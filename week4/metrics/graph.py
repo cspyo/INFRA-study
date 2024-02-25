@@ -1,24 +1,25 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-file_paths = {
-    "sns": "sns_metrics.csv",
-    "sqs-std": "sqs_std_metrics.csv",
-    "sqs-fifo": "sqs_fifo_metrics.csv",
-    "sns-sqs-std": "sns_sqs_std_metrics.csv",
-    "sns-sqs-fifo": "sns_sqs_fifo_metrics.csv",
-    "kinesis": "kinesis_metrics.csv"
-}
+# CSV 파일 읽기
+data = pd.read_csv("./all_metrics.csv")
 
-dfs = {name: pd.read_csv(path) for name, path in file_paths.items()}
+# 이름별로 그룹화
+grouped_data = data.groupby("name")
 
-for metric in ["total_events", "duplicates", "unordered_events", "duration"]:
+# 그래프 생성
+metrics = ['total_events', 'duplicates', 'unordered_events', 'duration']
+
+for metric in metrics:
     plt.figure(figsize=(10, 6))
     plt.title(metric)
-    for name, df in dfs.items():
-        plt.plot(df[metric], label=name)
-    plt.legend()
-    plt.xlabel("Index")
+    x_labels = []
+    for name, group in grouped_data:
+        plt.bar(name, group[metric].mean(), label=name)
+        x_labels.append(name)
+    plt.xlabel('Name')
     plt.ylabel(metric)
+    plt.xticks(ticks=range(len(x_labels)), labels=x_labels, rotation=45)
+    plt.legend()
     plt.grid(True)
     plt.show()
