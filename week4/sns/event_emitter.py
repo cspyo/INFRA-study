@@ -1,3 +1,5 @@
+import sys
+sys.path.append('/home/ubuntu/code/INFRA-study')
 import boto3
 import time
 from week4.util.get_env import get_sns
