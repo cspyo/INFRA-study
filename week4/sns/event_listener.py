@@ -10,7 +10,7 @@ app = Flask(__name__)
 def listen_event():
     request_data = request.data.decode('utf-8')
     event_dict = json.loads(request_data)
-    timestamp = int(event_dict['Timestamp'])
+    timestamp = float(event_dict['Message'])
     message_id = event_dict['MessageId']
     handle_event('sns', message_id, timestamp)
     return 'Event received'
