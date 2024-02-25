@@ -1,6 +1,5 @@
 from flask import Flask, request
 import threading
-from datetime import datetime
 import time
 import pandas as pd
 
@@ -17,7 +16,7 @@ event_timestamps = []
 def event_timer():
     global start_time, total_events, unique_events, event_timestamps, timer_running
 
-    start_time = datetime.now()
+    start_time = time.time()
 
     time.sleep(5)
 
@@ -26,13 +25,13 @@ def event_timer():
     total_events = 0
     unique_events = set()
     event_timestamps = []
-    start_time = datetime.now()
+    start_time = time.time()
     timer_running = False
 
 def metrics_to_csv():
     global total_events, unique_events, event_timestamps, start_time
 
-    end_time = datetime.now()
+    end_time = time.time()
 
     duplicates = total_events - len(unique_events)
 
@@ -74,7 +73,7 @@ def handle_event():
         timer_thread.start()
         timer_running = True
 
-    current_time = datetime.now()
+    current_time = time.time()
 
     total_events += 1
     unique_events.add(event)
