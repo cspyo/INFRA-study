@@ -1,10 +1,6 @@
-from flask import Flask, request
 import threading
 import time
 import pandas as pd
-import json
-
-app = Flask(__name__)
 
 start_time = None
 timer_running = False
@@ -19,7 +15,7 @@ def event_timer():
     time.sleep(60)
     metrics_to_csv()
 
-def metrics_to_csv():
+def metrics_to_csv(queue_name):
     global total_events, unique_events, event_timestamps, start_time
 
     end_time = time.time()
@@ -35,7 +31,8 @@ def metrics_to_csv():
         'duration': [end_time-start_time]
     })
 
-    metrics_df.to_csv('./sns_metrics.csv', index=False)
+    csv_name = f'./{queue_name}_metrics.csv'
+    metrics_df.to_csv(csv_name, index=False)
 
     print("Total events received:", total_events)
     print("Duplicate events:", duplicates)
@@ -52,27 +49,14 @@ def count_unordered_events(events):
             max_timestamp = timestamp
     return unordered_events
 
-@app.route('/event', methods=['POST'])
-def handle_event():
+def handle_event(queue_name, message_id, message_timestamp):
     global total_events, unique_events, event_timestamps, timer_running
 
-    data = request.data.decode('utf-8')
-    event_dict = json.loads(data)
-    
     if not timer_running:
-        timer_thread = threading.Thread(target=event_timer)
+        timer_thread = threading.Thread(target=event_timer, args=(queue_name))
         timer_thread.start()
         timer_running = True
 
     total_events += 1
-    unique_events.add(data)
-    event_timestamps.append(float(event_dict["Message"]))
-
-    return 'Event received'
-
-@app.route('/')
-def home():
-    return 'Hello'
-
-if __name__ == '__main__':
-    app.run('0.0.0.0', port=4000)
+    unique_events.add(message_id)
+    event_timestamps.append(message_timestamp)
