@@ -1,0 +1,43 @@
+version: 4
+globals:
+    prompt: ""
+    no_default_cluster: false
+    command_timeout: 0s
+    dial_timeout: 0s
+    request_timeout_overhead: 0s
+    retry_timeout: 0s
+    fetch_max_wait: 0s
+    kafka_protocol_request_client_id: ""
+current_profile: rpk-container
+current_cloud_auth_org_id: ""
+current_cloud_auth_kind: ""
+profiles:
+    - name: rpk-container
+      description: Automatically generated profile from 'rpk container start'
+      prompt: ""
+      from_cloud: false
+      kafka_api:
+        brokers:
+            - 127.0.0.1:13092
+            - 127.0.0.1:10092
+            - 127.0.0.1:11092
+            - 127.0.0.1:14092
+            - 127.0.0.1:12092
+            - 127.0.0.1:9092
+      admin_api:
+        addresses:
+            - 127.0.0.1:13644
+            - 127.0.0.1:10644
+            - 127.0.0.1:11644
+            - 127.0.0.1:14644
+            - 127.0.0.1:12644
+            - 127.0.0.1:9644
+      schema_registry:
+        addresses:
+            - 127.0.0.1:12081
+            - 127.0.0.1:9081
+            - 127.0.0.1:10081
+            - 127.0.0.1:13081
+            - 127.0.0.1:11081
+            - 127.0.0.1:8081
+cloud_auth: []
